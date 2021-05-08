@@ -24,8 +24,8 @@ const table_name = 'styles';
 const create_table = `
 DROP TABLE IF EXISTS ${table_name};
 CREATE TABLE IF NOT EXISTS ${table_name} (
-  ID SERIAL,
-  PRODUCTID INT NOT NULL,
+  ID SERIAL primary key,
+  PRODUCTID INT NOT NULL REFERENCES products,
   NAME TEXT,
   SALE_PRICE TEXT,
   ORIGINAL_PRICE INT,

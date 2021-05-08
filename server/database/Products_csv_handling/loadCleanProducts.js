@@ -18,16 +18,18 @@ client.connect()
 .catch((err) => console.log(err));
 
 //Join csv path file
-const jsonPath = path.join(__dirname, 'photos.csv');
-const table_name = 'photos';
+const jsonPath = path.join(__dirname, 'clean_product.csv');
+const table_name = 'products';
 //Create your queries here
 const create_table = `
 DROP TABLE IF EXISTS ${table_name};
 CREATE TABLE IF NOT EXISTS ${table_name} (
-  ID INT NOT NULL,
-  STYLEID INT,
-  URL TEXT,
-  THUMBNAIL_URL TEXT
+  PRID INT NOT NULL primary key,
+  NAME TEXT,
+  SLOGAN TEXT,
+  DESCRIPTION TEXT,
+  CATEGORY TEXT,
+  DEFAULT_PRICE INT
 );`;
 
 // Table creation & deletion

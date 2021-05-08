@@ -24,8 +24,8 @@ const table_name = 'features';
 const create_table = `
 DROP TABLE IF EXISTS ${table_name};
 CREATE TABLE IF NOT EXISTS ${table_name} (
-  ID INT NOT NULL,
-  PRODUCT_ID INT,
+  ID INT NOT NULL primary key,
+  PRODUCT_ID INT REFERENCES products,
   FEATURE TEXT,
   VALUE TEXT
 );`;

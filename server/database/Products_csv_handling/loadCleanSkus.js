@@ -24,8 +24,8 @@ const table_name = 'skus';
 const create_table = `
 DROP TABLE IF EXISTS ${table_name};
 CREATE TABLE IF NOT EXISTS ${table_name} (
-  ID INT NOT NULL,
-  STYLEID INT NOT NULL,
+  ID INT NOT NULL primary key,
+  STYLEID INT NOT NULL REFERENCES styles,
   SIZE TEXT,
   QUANTITY INT
 );`;
