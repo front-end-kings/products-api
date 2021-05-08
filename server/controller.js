@@ -5,12 +5,12 @@ const controller = {
     let limit = req.query.count || 5;
     let page = req.query.page || 1;
     let offset = limit * page - limit;
-    db.query(`SELECT * FROM products LIMIT ${limit} OFFSET ${offset}`, (err, result) => {
-      if (err) {
-        res.status(400).send(err);
-      } else {
-        res.status(200).send(result.rows);
-      }
+    db.query(`SELECT * FROM products LIMIT ${limit} OFFSET ${offset}`)
+    .then((result) => {
+      res.status(200).send(result.rows)
+    })
+    .catch((err) => {
+      res.status(400).send(err);
     })
   },
   getProductById: (req, res) => {
@@ -42,11 +42,16 @@ const controller = {
                SELECT photos.url, photos.thumbnail_url FROM photos
                WHERE photos.styleid = styles.id AND styles.productid = ${id}
              ) AS nested_photos
-           ) AS photos
+           ) AS photos,
+               (
+                 SELECT json_agg(nested_skus) FROM
+                 (SELECT skus.quantity, skus.size FROM skus WHERE styles.id = skus.styleid AND styles.productid = ${id}) as nested_skus
+             ) as skus
            FROM "styles" WHERE productid = ${id}) AS res)
        as results
     ) as b on a.productid= b.pr_id
-    where a.productid = ${id}`;
+    where a.productid = ${id};
+      `;
     db.query(queryString)
       .then((result) => {
         res.status(200).send(result.rows[0]);
