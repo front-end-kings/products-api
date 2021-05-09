@@ -4,6 +4,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 3030;
 const router = require('./router.js');
+require('newrelic');
 
 app.use(morgan('dev'));
 app.use(cors());

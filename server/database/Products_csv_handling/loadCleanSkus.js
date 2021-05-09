@@ -30,6 +30,12 @@ CREATE TABLE IF NOT EXISTS ${table_name} (
   QUANTITY INT
 );`;
 
+const create_index = `
+CREATE INDEX index_skus_style
+    ON public.skus USING btree
+    (styleid ASC NULLS LAST)
+    TABLESPACE pg_default;`;
+
 // Table creation & deletion
 client.query(create_table).then(res => console.log('Table successfully created!'));
 
@@ -48,7 +54,14 @@ stream.on('error', (error) => {
 })
 stream.on('finish', () => {
     console.log(`Completed loading data into ${table_name} `)
-    client.end();
+    client.query(create_index).then(() => {
+      console.log('created index');
+      client.end();
+    })
+    .catch((err) => {
+      console.log(err);
+      client.end();
+    })
 })
 /* ************************************ */
 
