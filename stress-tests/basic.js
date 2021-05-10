@@ -16,9 +16,9 @@ export let options = {
       executor: 'constant-arrival-rate',
       rate: 1000,
       timeUnit: '1s',
-      duration: '20s',
+      duration: '1m',
       preAllocatedVUs: 20,
-      maxVUs: 100,
+      maxVUs: 50,
     },
   },
 };
