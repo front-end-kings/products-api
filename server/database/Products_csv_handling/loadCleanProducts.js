@@ -5,9 +5,18 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
 
+// const client = new Client({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'products',
+//   password: config.TOKEN,
+//   port: 5432,
+// });
+
+//for ubuntu
 const client = new Client({
-  user: 'postgres',
-  host: 'localhost',
+  user: 'ubuntu',
+  host: 'ec2-54-183-62-70.us-west-1.compute.amazonaws.com',
   database: 'products',
   password: config.TOKEN,
   port: 5432,
