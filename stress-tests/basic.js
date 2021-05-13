@@ -2,8 +2,8 @@ import http from 'k6/http';
 import { check } from 'k6';
 
 export default function () {
-    const rnd = Math.floor(Math.random() * 100);
-    const response = http.get(`http://localhost:3030/api/products/${rnd}`);
+   // const rnd = Math.floor(Math.random() * 100);
+    const response = http.get('http://ec2-54-176-94-164.us-west-1.compute.amazonaws.com:3000/api/products/1');
     // console.log('Response time was ' + String(response.timings.duration) + ' ms');
     check(response, {
         "is status 200": (r) => r.status === 200,
